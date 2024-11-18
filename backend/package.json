@@ -1,0 +1,48 @@
+{
+	"name": "backend",
+	"type": "module",
+	"types": "src/index.ts",
+	"scripts": {
+		"dev:api": "dotenvx run -- tsx watch src/api.ts",
+		"dev:auth": "dotenvx run -- tsx watch src/auth/server.ts",
+		"dev:trpc": "dotenvx run -- tsx watch src/trpc/server.ts",
+		"dev:temporal-worker": "dotenvx run -- tsx watch src/temporal/worker.ts",
+		"dev:temporal-server": "temporal server start-dev",
+		"dev:email": "email dev --dir=src/resend/emails --port=2999",
+		"db:push": "dotenvx run -- drizzle-kit push",
+		"db:generate": "dotenvx run -- drizzle-kit generate",
+		"db:migrate": "dotenvx run -- drizzle-kit migrate",
+		"db:studio": "dotenvx run -- drizzle-kit studio",
+		"auth:generate": "pnpm dlx @better-auth/cli generate"
+	},
+	"dependencies": {
+		"@dotenvx/dotenvx": "^1.24.0",
+		"@fastify/swagger": "^9.3.0",
+		"@react-email/components": "^0.0.28",
+		"@scalar/fastify-api-reference": "^1.25.66",
+		"@sinclair/typebox": "^0.34.3",
+		"@temporalio/client": "^1.11.3",
+		"@temporalio/worker": "^1.11.3",
+		"@temporalio/workflow": "^1.11.3",
+		"@trpc/server": "11.0.0-rc.638",
+		"better-auth": "0.8.5-beta.3",
+		"cors": "^2.8.5",
+		"drizzle-orm": "^0.36.3",
+		"fastify": "^5.1.0",
+		"postgres": "^3.4.5",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"resend": "4.0.1-alpha.0",
+		"superjson": "^2.2.1",
+		"twilio": "^5.3.6",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@types/cors": "^2.8.17",
+		"@types/react": "^18.3.12",
+		"drizzle-kit": "^0.28.1",
+		"react-email": "^3.0.2",
+		"tsx": "^4.19.2",
+		"typescript": "^5.6.3"
+	}
+}

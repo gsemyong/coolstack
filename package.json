@@ -1,0 +1,14 @@
+{
+	"name": "taskill",
+	"scripts": {
+		"typecheck": "turbo run typecheck",
+		"build": "turbo run build",
+		"dev": "turbo run db:studio dev:temporal-server dev:temporal-worker dev:trpc dev:auth dev:api dev:email dev"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"turbo": "latest",
+		"typescript": "^5.6.3"
+	},
+	"packageManager": "pnpm@9.0.0"
+}
