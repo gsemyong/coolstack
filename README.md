@@ -8,7 +8,7 @@
 - [x] Temporal
 - [x] Resend
 - [x] Shadcn with sidebar layout
-- [ ] Biome linting and formatting
+- [x] Prettier
 
 # Nice to have
 
@@ -31,7 +31,7 @@
 - [x] Trigger background jobs from application
 - [x] Create pages and content collection for blog (dirty)
 - [x] Setup external api with fastify
-- [ ] Setup biome linting and formatting
+- [x] Setup prettier
 - [ ] Add typesafe realtime features with tRPC
 - [ ] Setup PWA for app
 - [ ] Setup stripe for payments

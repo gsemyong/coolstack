@@ -1,49 +1,49 @@
 {
-	"$schema": "https://turbo.build/schema.json",
-	"ui": "tui",
-	"tasks": {
-		"format": {
-			"dependsOn": ["^format"],
-			"interactive": false,
-			"persistent": false
-		},
-		"build": {
-			"outputs": ["dist/**"]
-		},
-		"typecheck": {
-			"dependsOn": ["^typecheck"]
-		},
-		"dev:email": {
-			"persistent": true,
-			"cache": false
-		},
-		"dev:temporal-server": {
-			"persistent": true,
-			"cache": false
-		},
-		"dev:temporal-worker": {
-			"persistent": true,
-			"cache": false
-		},
-		"dev:trpc": {
-			"persistent": true,
-			"cache": false
-		},
-		"dev:auth": {
-			"persistent": true,
-			"cache": false
-		},
-		"dev:api": {
-			"persistent": true,
-			"cache": false
-		},
-		"dev": {
-			"persistent": true,
-			"cache": false
-		},
-		"db:studio": {
-			"persistent": true,
-			"cache": false
-		}
-	}
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "format": {
+      "dependsOn": ["^format"],
+      "interactive": false,
+      "persistent": false
+    },
+    "build": {
+      "outputs": ["dist/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
+    },
+    "dev:email": {
+      "persistent": true,
+      "cache": false
+    },
+    "dev:temporal-server": {
+      "persistent": true,
+      "cache": false
+    },
+    "dev:temporal-worker": {
+      "persistent": true,
+      "cache": false
+    },
+    "dev:trpc": {
+      "persistent": true,
+      "cache": false
+    },
+    "dev:auth": {
+      "persistent": true,
+      "cache": false
+    },
+    "dev:api": {
+      "persistent": true,
+      "cache": false
+    },
+    "dev": {
+      "persistent": true,
+      "cache": false
+    },
+    "db:studio": {
+      "persistent": true,
+      "cache": false
+    }
+  }
 }
