@@ -37,6 +37,10 @@
       "persistent": true,
       "cache": false
     },
+    "dev:socket": {
+      "persistent": true,
+      "cache": false
+    },
     "dev": {
       "persistent": true,
       "cache": false

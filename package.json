@@ -4,7 +4,7 @@
     "format": "turbo run format",
     "typecheck": "turbo run typecheck",
     "build": "turbo run build",
-    "dev": "turbo run db:studio dev:temporal-server dev:temporal-worker dev:trpc dev:auth dev:api dev:email dev"
+    "dev": "turbo run --concurrency 11 db:studio dev:temporal-server dev:temporal-worker dev:trpc dev:auth dev:api dev:email dev:socket dev"
   },
   "devDependencies": {
     "turbo": "latest",

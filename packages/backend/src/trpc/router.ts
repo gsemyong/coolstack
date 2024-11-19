@@ -3,8 +3,7 @@ import { post } from "@/db/schema";
 import { env } from "@/env";
 import { temporal } from "@/temporal/client";
 import * as workflows from "@/temporal/workflows";
-import { TRPCError, initTRPC } from "@trpc/server";
-import EventEmitter, { on } from "events";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { z } from "zod";
 import type { Context } from "./context";
@@ -28,8 +27,6 @@ const protectedProcedure = t.procedure.use(
   }),
 );
 
-const ee = new EventEmitter();
-
 export const appRouter = t.router({
   getUserEmail: protectedProcedure.query(async ({ ctx }) => {
     return ctx.auth.user.email;
@@ -48,18 +45,7 @@ export const appRouter = t.router({
         taskQueue: env.TEMPORAL_TASK_QUEUE,
         workflowId: `add-post-${input.title}`,
       });
-      ee.emit("add", input);
     }),
-  onPostAdd: publicProcedure.subscription(async function* (opts) {
-    // listen for new events
-    for await (const [data] of on(ee, "add", {
-      // Passing the AbortSignal from the request automatically cancels the event emitter when the request is aborted
-      signal: opts.signal,
-    })) {
-      const newPost = data as typeof post.$inferSelect;
-      yield newPost;
-    }
-  }),
 });
 
 export type AppRouter = typeof appRouter;

@@ -4,6 +4,7 @@
   "types": "src/index.ts",
   "scripts": {
     "format": "prettier --write .",
+    "dev:socket": "dotenvx run -- tsx watch src/socket/server.ts",
     "dev:api": "dotenvx run -- tsx watch src/api.ts",
     "dev:auth": "dotenvx run -- tsx watch src/auth/server.ts",
     "dev:trpc": "dotenvx run -- tsx watch src/trpc/server.ts",
@@ -34,6 +35,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "resend": "4.0.1-alpha.0",
+    "socket.io": "^4.8.1",
     "superjson": "^2.2.1",
     "twilio": "^5.3.6",
     "zod": "^3.23.8"

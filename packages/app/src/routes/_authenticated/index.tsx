@@ -17,6 +17,14 @@ function RouteComponent() {
   const { data: posts } = trpc.getPosts.useQuery();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const { data: mySubscription } = trpc.mySubscription.useSubscription(
+    { lastEventId: 0 },
+    {
+      onData(data) {
+        console.log("mySubscription", data);
+      },
+    },
+  );
 
   return (
     <div className="space-y-8">

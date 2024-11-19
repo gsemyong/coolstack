@@ -32,7 +32,7 @@
 - [x] Create pages and content collection for blog (dirty)
 - [x] Setup external api with fastify
 - [x] Setup prettier
-- [ ] Add typesafe realtime features with tRPC
+- [ ] Add realtime with socket.io
 - [ ] Setup PWA for app
 - [ ] Setup stripe for payments
 - [ ] Refactor shared UI to be in a separate package
