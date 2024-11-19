@@ -25,11 +25,11 @@ if ! docker info > /dev/null 2>&1; then
 fi
 
 # Check if container is already running
-if [ "$(docker ps -q -f name=taskill-postgres)" ]; then
+if [ "$(docker ps -q -f name=coolstack-postgres)" ]; then
     echo "PostgreSQL container is already running"
     # Get the port the container is running on
-    PORT=$(docker port taskill-postgres 5432/tcp | cut -d ':' -f 2)
-    DATABASE_URL="postgresql://postgres:postgres@localhost:$PORT/taskill"
+    PORT=$(docker port coolstack-postgres 5432/tcp | cut -d ':' -f 2)
+    DATABASE_URL="postgresql://postgres:postgres@localhost:$PORT/coolstack"
     echo "Using existing PostgreSQL on port $PORT"
 else
     # Generate a random port between 5432 and 5532
@@ -37,15 +37,15 @@ else
     PORT=$(( RANDOM % 101 + 5432 ))
 
     # Check if stopped container exists and remove it
-    if [ "$(docker ps -aq -f name=taskill-postgres)" ]; then
-        docker rm -f taskill-postgres
+    if [ "$(docker ps -aq -f name=coolstack-postgres)" ]; then
+        docker rm -f coolstack-postgres
     fi
 
     # Start PostgreSQL container with latest version
-    docker run --name taskill-postgres \
+    docker run --name coolstack-postgres \
         -e POSTGRES_USER=postgres \
         -e POSTGRES_PASSWORD=postgres \
-        -e POSTGRES_DB=taskill \
+        -e POSTGRES_DB=coolstack \
         -p $PORT:5432 \
         -d postgres:latest
 
@@ -58,7 +58,7 @@ fi
 
 # Create or update .env file
 ENV_FILE=".env"
-DATABASE_URL="postgresql://postgres:postgres@localhost:$PORT/taskill"
+DATABASE_URL="postgresql://postgres:postgres@localhost:$PORT/coolstack"
 
 if [ -f "$ENV_FILE" ]; then
     # Update existing DATABASE_URL
