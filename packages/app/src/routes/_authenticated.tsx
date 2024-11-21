@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { useSession } from "@/lib/better-auth";
 import { getCookie } from "@/lib/utils";
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
@@ -20,10 +20,7 @@ function RouteComponent() {
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
-      <main className="p-4">
-        <SidebarTrigger />
-        <Outlet />
-      </main>
+      <Outlet />
     </SidebarProvider>
   );
 }

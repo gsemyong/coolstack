@@ -14,7 +14,18 @@ const io = new Server<
   InterServerEvents,
   SocketData
 >(httpServer, {
-  // options
+  cors: {
+    origin: "http://localhost:3001",
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["POST", "GET", "OPTIONS"],
+    exposedHeaders: ["Content-Length"],
+    maxAge: 600,
+    credentials: true,
+  },
+});
+
+io.use((socket, next) => {
+  next();
 });
 
 io.on("connection", (socket) => {

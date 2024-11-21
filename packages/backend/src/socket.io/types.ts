@@ -4,15 +4,8 @@ export interface ServerToClientEvents {
   withAck: (d: string, callback: (e: number) => void) => void;
 }
 
-export interface ClientToServerEvents {
-  hello: () => void;
-}
+export interface ClientToServerEvents {}
 
-export interface InterServerEvents {
-  ping: () => void;
-}
+export interface InterServerEvents {}
 
-export interface SocketData {
-  name: string;
-  age: number;
-}
+export interface SocketData {}
