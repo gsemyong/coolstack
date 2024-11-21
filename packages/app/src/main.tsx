@@ -1,6 +1,7 @@
 import { createRouter } from "@/router";
 import { RouterProvider } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
+import "@fontsource-variable/inter";
 import "@/index.css";
 
 const router = createRouter();

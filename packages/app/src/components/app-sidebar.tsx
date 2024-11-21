@@ -16,7 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { signOut } from "@/lib/better-auth";
+import { signOut, useSession } from "@/lib/better-auth";
 import { trpc } from "@/lib/trpc";
 import {
   Calendar,
@@ -60,10 +60,9 @@ const items = [
 
 export function AppSidebar() {
   const { isMobile, setOpenMobile, openMobile } = useSidebar();
-  const { data: userEmail } = trpc.getUserEmail.useQuery();
-
+  const session = useSession();
   useEffect(() => {
-    if (!openMobile) document.querySelector("body")?.removeAttribute("style");
+    if (!openMobile) document.querySelector("body")?.setAttribute("style", "");
   }, [openMobile]);
 
   return (
@@ -93,7 +92,7 @@ export function AppSidebar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
-                  <User2Icon /> {userEmail}
+                  <User2Icon /> {session.data?.user.email}
                   <ChevronUp className="ml-auto" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>

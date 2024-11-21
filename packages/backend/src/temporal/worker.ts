@@ -1,6 +1,6 @@
-import { env } from "@/env";
-import * as activities from "@/temporal/activities";
-import "@/temporal/workflows";
+import { env } from "../env";
+import * as activities from "./activities";
+import "./workflows";
 import { createRequire } from "module";
 import { NativeConnection, Worker } from "@temporalio/worker";
 
@@ -14,7 +14,7 @@ const worker = await Worker.create({
   connection,
   namespace: env.TEMPORAL_NAMESPACE,
   taskQueue: env.TEMPORAL_TASK_QUEUE,
-  workflowsPath: require.resolve("@/temporal/workflows"),
+  workflowsPath: require.resolve("./workflows"),
   activities,
 });
 

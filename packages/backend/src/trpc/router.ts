@@ -1,18 +1,11 @@
 import { z } from "zod";
-import { auth } from "../better-auth";
+import { auth } from "../better-auth/client";
 import { env } from "../env";
-import { prisma } from "../prisma";
-import { temporal, workflows } from "../temporal";
-import { protectedProcedure, router } from "./utilts";
+import { prisma } from "../prisma/client";
+import { temporal } from "../temporal/client";
+import * as workflows from "../temporal/workflows";
+import { procedure, router } from "./utils";
 
-export const appRouter = router({
-  getUserEmail: protectedProcedure.query(async ({ ctx }) => {
-    return ctx.auth.user.email;
-  }),
-  getPosts: protectedProcedure.query(async ({ ctx }) => {
-    const posts = await prisma.post.findMany();
-    return posts;
-  }),
-});
+export const appRouter = router({});
 
 export type AppRouter = typeof appRouter;

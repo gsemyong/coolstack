@@ -1,7 +1,5 @@
-import { env } from "@/env";
 import { Client, Connection } from "@temporalio/client";
-
-export * as workflows from "./workflows";
+import { env } from "../env";
 
 const connection = await Connection.connect({
   address: env.TEMPORAL_ADDRESS,

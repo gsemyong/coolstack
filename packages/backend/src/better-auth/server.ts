@@ -1,7 +1,7 @@
 import http from "http";
 import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
-import { auth } from ".";
+import { auth } from "./client";
 
 const server = http.createServer((req, res) => {
   // Apply CORS middleware first

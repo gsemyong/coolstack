@@ -6,7 +6,7 @@ const t = initTRPC.context<Context>().create({
   transformer: SuperJSON,
 });
 
-export const protectedProcedure = t.procedure.use(
+export const procedure = t.procedure.use(
   t.middleware(async ({ ctx, next }) => {
     if (!ctx.auth) {
       throw new TRPCError({ code: "UNAUTHORIZED" });

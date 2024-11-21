@@ -29,15 +29,15 @@
       "persistent": true,
       "cache": false
     },
-    "dev:auth": {
+    "dev:better-auth": {
       "persistent": true,
       "cache": false
     },
-    "dev:api": {
+    "dev:fastify": {
       "persistent": true,
       "cache": false
     },
-    "dev:socket": {
+    "dev:socket.io": {
       "persistent": true,
       "cache": false
     },

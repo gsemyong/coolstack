@@ -7,10 +7,12 @@ import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 export function createRouter() {
   const router = createTanStackRouter({
     routeTree,
-    defaultPreload: "render",
     context: {
       trpcQueryUtils,
+    } as {
+      trpcQueryUtils: typeof trpcQueryUtils;
     },
+    defaultPreload: "render",
     defaultPendingComponent: () => (
       <div className={`p-2 text-2xl`}>
         <Spinner />

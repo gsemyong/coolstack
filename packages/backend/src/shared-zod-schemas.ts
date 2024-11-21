@@ -1,7 +1,6 @@
 import { z } from "zod";
 
-export const helloSchema = z.object({
-  name: z.string(),
+export const createUserSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(10),
 });
-
-export type Hello = z.infer<typeof helloSchema>;

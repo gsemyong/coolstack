@@ -54,7 +54,7 @@ function RouteComponent() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
+    <div className="flex min-h-dvh items-center justify-center">
       <Card className="w-[350px]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Sign in</CardTitle>
@@ -88,10 +88,11 @@ function RouteComponent() {
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
             <Button className="w-full" type="submit" disabled={isLoading}>
-              {isLoading && (
-                <LoaderIcon className="mr-2 h-4 w-4 animate-spin" />
+              {isLoading ? (
+                <LoaderIcon className="h-4 w-4 animate-spin" />
+              ) : (
+                "Sign In"
               )}
-              Sign In
             </Button>
             <div className="text-center text-sm">
               Don&apos;t have an account?{" "}

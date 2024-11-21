@@ -6,11 +6,11 @@ export const Route = createFileRoute("/_auth")({
 });
 
 function RouteComponent() {
-  const { data, isPending } = useSession();
+  const session = useSession();
 
-  if (isPending) return null;
+  if (session.isPending) return null;
 
-  if (data) return <Navigate to="/" />;
+  if (session.data) return <Navigate to="/" />;
 
   return <Outlet />;
 }

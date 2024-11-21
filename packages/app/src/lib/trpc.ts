@@ -6,7 +6,7 @@ import { SuperJSON } from "superjson";
 
 export const queryClient = new QueryClient();
 
-export const trpc = createTRPCReact<AppRouter>({});
+export const trpc = createTRPCReact<AppRouter>();
 
 export const trpcClient = trpc.createClient({
   links: [

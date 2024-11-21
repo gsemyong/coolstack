@@ -1,6 +1,7 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { useSession } from "@/lib/better-auth";
+import { getCookie } from "@/lib/utils";
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -8,13 +9,16 @@ export const Route = createFileRoute("/_authenticated")({
 });
 
 function RouteComponent() {
-  const { data, isPending } = useSession();
-  if (isPending) return null;
+  const session = useSession();
 
-  if (!data) return <Navigate to="/sign-in" />;
+  if (session.isPending) return null;
+
+  if (!session.data) return <Navigate to="/sign-in" />;
+
+  const defaultOpen = getCookie("sidebar:state") === "true";
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
       <main className="p-4">
         <SidebarTrigger />
