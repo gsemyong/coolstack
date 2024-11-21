@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { useSession } from "@/lib/better-auth";
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth")({
@@ -6,7 +6,7 @@ export const Route = createFileRoute("/_auth")({
 });
 
 function RouteComponent() {
-  const { data, isPending } = auth.useSession();
+  const { data, isPending } = useSession();
 
   if (isPending) return null;
 

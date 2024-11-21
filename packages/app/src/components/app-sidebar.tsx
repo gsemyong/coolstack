@@ -16,7 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { auth } from "@/lib/auth";
+import { signOut } from "@/lib/better-auth";
 import { trpc } from "@/lib/trpc";
 import {
   Calendar,
@@ -63,7 +63,7 @@ export function AppSidebar() {
   const { data: userEmail } = trpc.getUserEmail.useQuery();
 
   useEffect(() => {
-    document.querySelector("body")?.setAttribute("style", "");
+    if (!openMobile) document.querySelector("body")?.removeAttribute("style");
   }, [openMobile]);
 
   return (
@@ -110,7 +110,7 @@ export function AppSidebar() {
                 <DropdownMenuItem
                   onClick={() => {
                     if (isMobile) setOpenMobile(false);
-                    auth.signOut();
+                    signOut();
                   }}
                 >
                   <span>Sign out</span>

@@ -3,4 +3,7 @@ import { io, Socket } from "socket.io-client";
 
 export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
   "http://localhost:2997",
+  {
+    withCredentials: true,
+  },
 );

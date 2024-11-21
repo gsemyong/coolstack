@@ -5,7 +5,7 @@ import type {
   InterServerEvents,
   ServerToClientEvents,
   SocketData,
-} from "./types";
+} from "./index";
 
 const httpServer = createServer();
 const io = new Server<

@@ -1,5 +1,5 @@
-import { env } from "@/env";
 import createTwilioClient from "twilio";
+import { env } from "../env";
 
 export const twilio = createTwilioClient(
   env.TWILIO_ACCOUNT_SID,

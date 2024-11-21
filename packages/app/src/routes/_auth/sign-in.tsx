@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { auth } from "@/lib/auth";
+import { signIn } from "@/lib/better-auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { LoaderIcon } from "lucide-react";
@@ -43,7 +43,7 @@ function RouteComponent() {
 
   const onSubmit = async ({ email, password }: SignInData) => {
     setIsLoading(true);
-    const result = await auth.signIn.email({
+    const result = await signIn.email({
       email,
       password,
     });

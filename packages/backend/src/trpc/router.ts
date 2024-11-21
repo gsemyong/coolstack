@@ -1,51 +1,18 @@
-import { db } from "@/db/client";
-import { post } from "@/db/schema";
-import { env } from "@/env";
-import { temporal } from "@/temporal/client";
-import * as workflows from "@/temporal/workflows";
-import { initTRPC, TRPCError } from "@trpc/server";
-import superjson from "superjson";
 import { z } from "zod";
-import type { Context } from "./context";
+import { auth } from "../better-auth";
+import { env } from "../env";
+import { prisma } from "../prisma";
+import { temporal, workflows } from "../temporal";
+import { protectedProcedure, router } from "./utilts";
 
-const t = initTRPC.context<Context>().create({
-  transformer: superjson,
-});
-
-const publicProcedure = t.procedure;
-const protectedProcedure = t.procedure.use(
-  t.middleware(async ({ ctx, next }) => {
-    if (!ctx.auth) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
-    }
-
-    return next({
-      ctx: {
-        auth: ctx.auth,
-      },
-    });
-  }),
-);
-
-export const appRouter = t.router({
+export const appRouter = router({
   getUserEmail: protectedProcedure.query(async ({ ctx }) => {
     return ctx.auth.user.email;
   }),
-  getPosts: publicProcedure.query(async () => {
-    const posts = await db.query.post.findMany();
-
+  getPosts: protectedProcedure.query(async ({ ctx }) => {
+    const posts = await prisma.post.findMany();
     return posts;
   }),
-  addPost: publicProcedure
-    .input(z.object({ title: z.string(), content: z.string().optional() }))
-    .mutation(async ({ input }) => {
-      await db.insert(post).values(input);
-      await temporal.workflow.start(workflows.example, {
-        args: [input.title],
-        taskQueue: env.TEMPORAL_TASK_QUEUE,
-        workflowId: `add-post-${input.title}`,
-      });
-    }),
 });
 
 export type AppRouter = typeof appRouter;

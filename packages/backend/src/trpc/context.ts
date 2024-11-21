@@ -1,4 +1,4 @@
-import { auth } from "@/auth/client";
+import { auth } from "@/better-auth";
 import type { CreateHTTPContextOptions } from "@trpc/server/adapters/standalone";
 import { fromNodeHeaders } from "better-auth/node";
 
