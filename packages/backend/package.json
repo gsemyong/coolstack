@@ -18,6 +18,7 @@
     "push:prisma": "prisma db push --schema ./src/prisma/schema"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.0.4",
     "@dotenvx/dotenvx": "^1.24.4",
     "@fastify/swagger": "^9.3.0",
     "@prisma/client": "5.22.0",
@@ -28,6 +29,7 @@
     "@temporalio/worker": "^1.11.5",
     "@temporalio/workflow": "^1.11.5",
     "@trpc/server": "11.0.0-rc.638",
+    "ai": "^4.0.3",
     "better-auth": "0.8.5-beta.3",
     "cors": "^2.8.5",
     "fastify": "^5.1.0",

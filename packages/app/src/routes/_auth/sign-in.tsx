@@ -55,7 +55,7 @@ function RouteComponent() {
 
   return (
     <div className="flex min-h-dvh items-center justify-center">
-      <Card className="w-[350px]">
+      <Card className="w-full max-w-sm border-none bg-background shadow-none">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Sign in</CardTitle>
           <CardDescription>
@@ -73,14 +73,16 @@ function RouteComponent() {
                 type="email"
               />
               {errors.email && (
-                <p className="text-sm text-red-500">{errors.email.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.email.message}
+                </p>
               )}
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <Input id="password" {...register("password")} type="password" />
               {errors.password && (
-                <p className="text-sm text-red-500">
+                <p className="text-sm text-destructive">
                   {errors.password.message}
                 </p>
               )}
@@ -94,7 +96,7 @@ function RouteComponent() {
                 "Sign In"
               )}
             </Button>
-            <div className="text-center text-sm">
+            <div className="text-center text-sm text-muted-foreground">
               Don&apos;t have an account?{" "}
               <Link to="/sign-up" className="text-primary hover:underline">
                 Sign up

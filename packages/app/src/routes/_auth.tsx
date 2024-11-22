@@ -10,7 +10,7 @@ function RouteComponent() {
 
   if (session.isPending) return null;
 
-  if (session.data) return <Navigate to="/" />;
+  if (session.data) return <Navigate to="/home" />;
 
   return <Outlet />;
 }

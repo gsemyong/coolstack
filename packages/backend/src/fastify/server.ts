@@ -1,14 +1,13 @@
+import { openai } from "@ai-sdk/openai";
 import FastifySwagger from "@fastify/swagger";
 import ScalarApiReference from "@scalar/fastify-api-reference";
-import { Type, type Static } from "@sinclair/typebox";
+import { streamText, type Message } from "ai";
 import Fastify from "fastify";
 
-// Instantiate the framework
 const fastify = Fastify({
   logger: true,
 });
 
-// Set up @fastify/swagger
 await fastify.register(FastifySwagger, {
   openapi: {
     info: {
@@ -27,54 +26,24 @@ await fastify.register(FastifySwagger, {
   },
 });
 
-// Define the schema types
-const ParamsSchema = Type.Object({
-  id: Type.String({
-    description: "user id",
-  }),
+fastify.post<{
+  Body: {
+    messages: Message[];
+  };
+}>("/chat", (req, reply) => {
+  const result = streamText({
+    model: openai("gpt-4o"),
+    system: "You are a helpful assistant.",
+    messages: req.body.messages,
+  });
+
+  // Mark the response as a v1 data stream:
+  reply.header("X-Vercel-AI-Data-Stream", "v1");
+  reply.header("Content-Type", "text/plain; charset=utf-8");
+
+  return reply.send(result.toDataStream());
 });
 
-const BodySchema = Type.Object({
-  hello: Type.String(),
-  obj: Type.Object({
-    some: Type.String(),
-  }),
-});
-
-// Create static types from schemas
-type ParamsType = Static<typeof ParamsSchema>;
-type BodyType = Static<typeof BodySchema>;
-
-fastify.put<{
-  Params: ParamsType;
-  Body: BodyType;
-}>(
-  "/example-route/:id",
-  {
-    schema: {
-      description: "post some data",
-      tags: ["user", "code"],
-      summary: "qwerty",
-      security: [{ apiKey: [] }],
-      params: ParamsSchema,
-      body: BodySchema,
-      response: {
-        201: Type.Object({
-          hello: Type.String(),
-        }),
-        default: Type.Object({
-          foo: Type.String(),
-        }),
-      },
-    },
-  },
-  (req, reply) => {
-    // Now req.body is properly typed
-    reply.code(201).send({ hello: `Hello ${req.body.hello}` });
-  },
-);
-
-// Serve an OpenAPI file
 fastify.get("/openapi.json", async () => {
   return fastify.swagger();
 });
@@ -92,7 +61,6 @@ await fastify.register(ScalarApiReference, {
   },
 });
 
-// Wait for Fastify
 await fastify.ready();
 
 // Run the server

@@ -63,7 +63,7 @@ function RouteComponent() {
 
   return (
     <div className="flex min-h-dvh items-center justify-center">
-      <Card className="w-[350px]">
+      <Card className="w-full max-w-sm border-none bg-background shadow-none">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Sign up</CardTitle>
           <CardDescription>Create an account to get started</CardDescription>
@@ -79,7 +79,9 @@ function RouteComponent() {
                 type="text"
               />
               {errors.name && (
-                <p className="text-sm text-red-500">{errors.name.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.name.message}
+                </p>
               )}
             </div>
             <div className="grid gap-2">
@@ -91,14 +93,16 @@ function RouteComponent() {
                 type="email"
               />
               {errors.email && (
-                <p className="text-sm text-red-500">{errors.email.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.email.message}
+                </p>
               )}
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <Input id="password" {...register("password")} type="password" />
               {errors.password && (
-                <p className="text-sm text-red-500">
+                <p className="text-sm text-destructive">
                   {errors.password.message}
                 </p>
               )}
@@ -111,7 +115,7 @@ function RouteComponent() {
                 type="password"
               />
               {errors.confirmPassword && (
-                <p className="text-sm text-red-500">
+                <p className="text-sm text-destructive">
                   {errors.confirmPassword.message}
                 </p>
               )}
@@ -125,7 +129,7 @@ function RouteComponent() {
                 "Sign Up"
               )}
             </Button>
-            <div className="text-center text-sm">
+            <div className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
               <Link to="/sign-in" className="text-primary hover:underline">
                 Sign in

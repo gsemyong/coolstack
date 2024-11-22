@@ -20,7 +20,9 @@ function RouteComponent() {
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
-      <Outlet />
+      <main className="p-4">
+        <Outlet />
+      </main>
     </SidebarProvider>
   );
 }
