@@ -37,10 +37,11 @@ io.on("connection", async (socket) => {
 
   const { session, user } = authData;
 
+  console.log(session, user);
+
   socket.on("ping", () => {
     socket.emit("pong", {
-      session,
-      user,
+      message: "Hi from the server!",
     });
   });
 });

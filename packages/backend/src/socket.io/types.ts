@@ -1,7 +1,5 @@
-import type { Session, User } from "better-auth/types";
-
 export interface ServerToClientEvents {
-  pong: (data: { session: Session; user: User }) => void;
+  pong: (data: { message: string }) => void;
 }
 
 export interface ClientToServerEvents {

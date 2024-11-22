@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { socket } from "@/lib/socket.io";
 import { createFileRoute } from "@tanstack/react-router";
-import { Session, User } from "better-auth/types";
+import { ServerToClientEvents } from "backend";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/_authenticated/home")({
@@ -9,19 +10,19 @@ export const Route = createFileRoute("/_authenticated/home")({
 });
 
 function RouteComponent() {
-  const [pong, setPong] = useState<{ session: Session; user: User } | null>(
-    null,
-  );
+  const { toast } = useToast();
 
   useEffect(() => {
     socket.on("pong", (data) => {
-      setPong(data);
+      toast({
+        title: "You've got a new message",
+        description: data.message,
+      });
     });
   }, []);
 
   return (
     <div>
-      <pre>{JSON.stringify(pong, null, 2)}</pre>
       <Button onClick={() => socket.emit("ping")}>Ping</Button>
     </div>
   );

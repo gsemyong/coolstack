@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/toaster";
 import { useSession } from "@/lib/better-auth";
 import { getCookie } from "@/lib/utils";
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
@@ -18,11 +19,14 @@ function RouteComponent() {
   const defaultOpen = getCookie("sidebar:state") === "true";
 
   return (
-    <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar />
-      <main className="p-4">
-        <Outlet />
-      </main>
-    </SidebarProvider>
+    <>
+      <SidebarProvider defaultOpen={defaultOpen}>
+        <AppSidebar />
+        <main className="p-4">
+          <Outlet />
+        </main>
+      </SidebarProvider>
+      <Toaster />
+    </>
   );
 }
