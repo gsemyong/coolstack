@@ -6,6 +6,8 @@ import { temporal } from "../temporal/client";
 import * as workflows from "../temporal/workflows";
 import { procedure, router } from "./utils";
 
-export const appRouter = router({});
+export const appRouter = router({
+  ping: procedure.query(({ ctx }) => {}),
+});
 
 export type AppRouter = typeof appRouter;

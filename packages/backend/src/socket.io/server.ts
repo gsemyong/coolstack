@@ -1,5 +1,7 @@
 import { createServer } from "http";
+import { fromNodeHeaders } from "better-auth/node";
 import { Server } from "socket.io";
+import { auth } from "../better-auth/client";
 import type {
   ClientToServerEvents,
   InterServerEvents,
@@ -24,12 +26,23 @@ const io = new Server<
   },
 });
 
-io.use((socket, next) => {
-  next();
-});
+io.on("connection", async (socket) => {
+  const authData = await auth.api.getSession({
+    headers: fromNodeHeaders(socket.handshake.headers),
+  });
 
-io.on("connection", (socket) => {
-  // ...
+  if (!authData) {
+    return socket.disconnect();
+  }
+
+  const { session, user } = authData;
+
+  socket.on("ping", () => {
+    socket.emit("pong", {
+      session,
+      user,
+    });
+  });
 });
 
 httpServer.listen(2997, () => {

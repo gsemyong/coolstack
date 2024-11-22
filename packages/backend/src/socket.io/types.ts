@@ -1,10 +1,12 @@
+import type { Session, User } from "better-auth/types";
+
 export interface ServerToClientEvents {
-  noArg: () => void;
-  basicEmit: (a: number, b: string, c: Buffer) => void;
-  withAck: (d: string, callback: (e: number) => void) => void;
+  pong: (data: { session: Session; user: User }) => void;
 }
 
-export interface ClientToServerEvents {}
+export interface ClientToServerEvents {
+  ping: () => void;
+}
 
 export interface InterServerEvents {}
 
